@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/Day1.dir/src/day1.cpp.o -o Day1 

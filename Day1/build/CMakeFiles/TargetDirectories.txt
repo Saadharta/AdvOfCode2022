@@ -1,3 +1,0 @@
-/home/saadharta/workspace/AdvOfCode2022/Day1/build/CMakeFiles/Day1.dir
-/home/saadharta/workspace/AdvOfCode2022/Day1/build/CMakeFiles/edit_cache.dir
-/home/saadharta/workspace/AdvOfCode2022/Day1/build/CMakeFiles/rebuild_cache.dir
