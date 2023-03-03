@@ -8,12 +8,19 @@
     **************************
 */
 #include <fstream>
+#include <iostream>
 #include "../inc/day1.hpp"
 #ifndef TOP_ELF_AMT
     /* How many Elves should be selected for the calories count? */
     #define TOP_ELF_AMT (1)
 #endif
-/* How to compare Elves? By checking which one carry more calories! */
+
+#ifndef CFG_PATH
+    /* path of the input file */
+    #define CFG_PATH ""
+#endif
+
+/* How to compare Elves? By checking which one carry the most calories! */
 inline bool compareCalories(Elf e1, Elf e2){
     return(e1 > e2);
 }
@@ -21,10 +28,17 @@ inline bool compareCalories(Elf e1, Elf e2){
 int main()
 {
     /* Elf vector generation */
-    std::ifstream infile("./cfg/input.txt");
+    std::ifstream i_file;
+    std::string path = (CFG_PATH);
+    std::string filename = "./input.txt";
+    i_file.open(path + filename);
     std::vector<int> calories;
     std::vector<Elf> v;
-    for( std::string line; getline( infile, line ); )
+    if(! i_file.is_open()){
+        std::cout << "Warning: unable to find file " << path << "/" << filename <<std::endl;
+        return -255;
+    }
+    for( std::string line; getline( i_file, line ); )
     {
         if(line.empty()){
             /* each empty line creates a new elf with the calories read*/
@@ -44,17 +58,7 @@ int main()
         std::cout << "Adding " << v[i].getCalories() << " to the total" << std::endl;
         total_calories_count += v[i].getCalories();
     }
-    /* return the vector index of the max calories carrier */
+    /* return total of calories carried */
     std::cout << "Amount of calories Carried : " << total_calories_count <<std::endl;
     return 0;
 }
-
-// some extra fun stuff to fetch the index of the max calories carrier:
-// in class Elf
-
-// in main
-    // std::vector<Elf>v {e1, e2, e23, e3, e4, e5};
-    // /* selection of the highest calories carrier */
-    // std::vector<Elf>::iterator itr = std::find(v.begin(), v.end(),max(v));
-    // /* return the vector index of the max calories carrier */
-    // std::cout << std::distance(v.begin(),itr);
