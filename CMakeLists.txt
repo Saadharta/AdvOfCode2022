@@ -1,9 +1,9 @@
 
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.10)
 
 project(AdventOfCode LANGUAGES CXX)
 
-set(DAY_VARIANTS 1)
+set(DAY_VARIANTS 1 2 3)
 set(DAY 1 CACHE STRING "which Day to execute")
 set_property(CACHE DAY PROPERTY STRINGS ${DAY_VARIANTS})
 
