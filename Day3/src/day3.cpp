@@ -4,7 +4,7 @@
     **************************
     Goal: Training session
     **************************
-    Topic: Advent of Code 2022: Day1
+    Topic: Advent of Code 2022: Day3
     **************************
 */
 #include <fstream>
@@ -27,18 +27,10 @@ Rucksack LineToRucksack(std::string line)
     return r;
 }
 
-/*
- * A X Rock 1pt
- * B Y Paper 2pt
- * C Z Scissor 3pt  
- * lost 0 pt
- * draw 3 pt
- * win 6 pt
- */
 void process_line(std::string line, std::vector<Rucksack>& v_Rucksack)
 {
     if(! line.empty()){
-        v_Rucksack.push_back(LineToRucksack(line));
+        v_Rucksack.push_back(std::move(LineToRucksack(line)));
     }else{
         /* process an empty line */
     }
@@ -59,7 +51,6 @@ std::vector<int> ItemVectorToValue(std::vector<char> i_item_vector)
 {
     std::vector<int> item_value;
     for(const auto& item : i_item_vector){
-        /* minuscules */
         item_value.push_back(ItemToValue(item));
     }
     return item_value;
@@ -69,8 +60,8 @@ int main()
 {
     /* Main class vector generation */
     std::ifstream i_file;
-    std::string path = (CFG_PATH);
-    std::string filename = "./input.txt";
+    std::string path(CFG_PATH);
+    std::string filename("./input.txt");
     i_file.open(path + filename);
     if(! i_file.is_open()){
         std::cout << "Warning: unable to find file " << path << "/" << filename <<std::endl;
@@ -85,7 +76,7 @@ int main()
         process_line(line, v);
         if(line_id %3 == 2) {
             /* greate an Elf Group */
-            g.push_back(ElfGroup(v));
+            g.push_back(std::move(ElfGroup(v)));
             v.clear();
         }
         line_id ++;
