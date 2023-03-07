@@ -52,21 +52,16 @@ class Rounds{
                 * a = Scissor(3)   b = Paper(2)
                 * However we need to shift b from [0,1,2] to [1,2,3]
                 */
-                if(0 != (opponent -1) %3){
-                    status = opponent -1;
-                }else{
-                    status = 3;
-                }
+                status = opponent -1;
+                if(0 == status) status = 3;
+
                 break;
             case 2: /* draw */
                 status = opponent + 3;
                 break;
             case 3: /* win */
-                if(0 != (opponent %3)){
-                    status = (opponent+1);
-                }else{
-                    status = 1;
-                }
+                status = (opponent +1);
+                if(4 == status) status = 1;
                 status += 6; /* points for victory */
                 break;
             default: break;
