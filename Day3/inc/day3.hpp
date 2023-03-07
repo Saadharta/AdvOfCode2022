@@ -4,7 +4,7 @@
     **************************
     Goal: Training session
     **************************
-    Topic: Advent of Code 2022: Day1
+    Topic: Advent of Code 2022: Day3
     **************************
 */
 #include <iostream>
@@ -17,7 +17,7 @@ class Compartment {
         Compartment(std::vector<char> i_v){
             for(const auto& i: i_v){
                 if(items.find(i)==items.end()) {
-                    items.insert(std::make_pair(i, 1));
+                    items.insert(std::move(std::make_pair(i, 1)));
                 }
                 else {
                     items[i]++;
