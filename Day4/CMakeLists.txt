@@ -1,6 +1,6 @@
 add_executable(${APP})
 set_target_properties(${APP} PROPERTIES LINKER_LANGUAGE CXX)
-set(extraFlags "-Wall -Wextra -Weffc++ -pedantic -pedantic-errors -std=c++11")
+set(extraFlags "-Wall -Wextra -Weffc++ -pedantic -pedantic-errors")
 set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} ${extraFlags})
 
 message("${CMAKE_CURRENT_SOURCE_DIR}")
@@ -16,7 +16,17 @@ target_include_directories(${APP}
         ${CMAKE_CURRENT_SOURCE_DIR}/inc
 )
 
-target_sources(${APP}
-    PRIVATE
-        ${CMAKE_CURRENT_SOURCE_DIR}/src/day${DAY}.cpp
-)
+if(${CMAKE_BUILD_TYPE} STREQUAL "Debug")
+    target_sources(${APP}
+        PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/tst/testDay${DAY}.cpp
+    )
+    
+    #link GTest to Test executable
+    target_link_libraries(${APP} PRIVATE gtest)
+else()
+    target_sources(${APP}
+        PRIVATE
+            ${CMAKE_CURRENT_SOURCE_DIR}/src/day${DAY}.cpp
+    )
+endif()

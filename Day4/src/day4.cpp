@@ -11,6 +11,8 @@
 #include <iostream>
 #include <numeric>
 #include <vector>
+
+
 #include "../inc/day4.hpp"
 
 #ifndef CFG_PATH
@@ -72,44 +74,49 @@ void process_line(std::string line, std::vector<ElfPair>& v_elf_pair)
     v_elf_pair.emplace_back(LineToElfPair(line));
 }
 
-int main()
+TEST(myfunctions, add)
 {
-    /* Main class vector generation */
-    std::ifstream i_file;
-    const std::string path(CFG_PATH);
-    const std::string filename("./input.txt");
-    i_file.open(path + filename);
-    if(! i_file.is_open()){
-        std::cout << "Warning: unable to find file " << path << "/" << filename <<std::endl;
-        return -255;
-    }
-    
-    std::vector<ElfPair> ep;
-    std::string line; 
-    while( getline(i_file, line) ){
-        process_line(line, ep);
-    }
-
-    int max_p1_points{0};
-    int max_p2_points{0};
-    bool is_overlapping_pair;
-    bool is_partial_overlapping_pair;
-    for(auto& itr: ep){
-        is_partial_overlapping_pair = itr.isPartialOverlappingSections();
-
-        std::cout << is_overlapping_pair << " " << is_partial_overlapping_pair << std::endl;
-        /* no partial overlap mean no possibility of full overlap*/
-        if(true == is_partial_overlapping_pair){
-            max_p2_points +=1;
-            is_overlapping_pair = itr.isOverlappingSections();
-            if(true == is_overlapping_pair){
-                max_p1_points +=1;
-            }
-        }
-
-    }
-    
-    std::cout << "Amount of Points for part1: " << max_p1_points <<std::endl;
-    std::cout << "Amount of Points for part2: " << max_p2_points <<std::endl;
-    return 0;
+    GTEST_ASSERT_EQ(add(10, 22), 32);
 }
+
+// int main()
+// {
+//     /* Main class vector generation */
+//     std::ifstream i_file;
+//     const std::string path(CFG_PATH);
+//     const std::string filename("./input.txt");
+//     i_file.open(path + filename);
+//     if(! i_file.is_open()){
+//         std::cout << "Warning: unable to find file " << path << "/" << filename <<std::endl;
+//         return -255;
+//     }
+    
+//     std::vector<ElfPair> ep;
+//     std::string line; 
+//     while( getline(i_file, line) ){
+//         process_line(line, ep);
+//     }
+
+//     int max_p1_points{0};
+//     int max_p2_points{0};
+//     bool is_overlapping_pair;
+//     bool is_partial_overlapping_pair;
+//     for(auto& itr: ep){
+//         is_partial_overlapping_pair = itr.isPartialOverlappingSections();
+
+//         std::cout << is_overlapping_pair << " " << is_partial_overlapping_pair << std::endl;
+//         /* no partial overlap mean no possibility of full overlap*/
+//         if(true == is_partial_overlapping_pair){
+//             max_p2_points +=1;
+//             is_overlapping_pair = itr.isOverlappingSections();
+//             if(true == is_overlapping_pair){
+//                 max_p1_points +=1;
+//             }
+//         }
+
+//     }
+    
+//     std::cout << "Amount of Points for part1: " << max_p1_points <<std::endl;
+//     std::cout << "Amount of Points for part2: " << max_p2_points <<std::endl;
+//     return 0;
+// }
