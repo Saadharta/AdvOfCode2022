@@ -14,7 +14,8 @@ endif()
 message("Day${DAY}")
 
 set(APP day${DAY})
-
+# While the ExternalProject_Add fails, this is the working fix...
+add_subdirectory(googletest)
 # I want to call the CMakeLists.txt from each day separately
 add_subdirectory(Day${DAY})
 
